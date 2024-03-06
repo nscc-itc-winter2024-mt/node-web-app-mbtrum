@@ -1,19 +1,48 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const sqlite3 = require('sqlite3'); 
+const path = require('path');
+
+const router = express.Router();
+
+// Open database with read/write permissions
+const db = new sqlite3.Database('./db/pets_database.db', sqlite3.OPEN_READWRITE, (err) => {
+  if(err)
+    console.log("Error:", err);
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express App', welcome: 'Welcome to my first Node Express app.' });
+
+  // Select records from Pet table
+  db.all('SELECT PetId, Name, Age, Breed, PhotoFileName FROM Pet', (err, rows) => {
+    res.render('index', { pets: rows });
+  });
+
 });
 
-// Get Cats page
-router.get('/cats', function(req, res, next) {
-  res.render('cats', { welcome: 'Welcome to my cats page.' });
+/* GET craete Page */ 
+router.get('/create', function(req, res, next) {
+  res.render('create');
 });
 
-// Get Dogs page
-router.get('/dogs', function(req, res, next) {
-  res.render('dogs', { welcome: 'Welcome to my dogs page.' });
+/* POST craete Page */ 
+router.post('/create',  function(req, res, next) {
+  const name = req.body.Name;
+  const age = req.body.Age;
+  const breed = req.body.Breed;
+
+  // Upload photo
+  const imageFile = req.files.imageFile;
+  const imageName = imageFile.name;
+
+  var filepath = path.join(_dirname, 'public', 'uploads', imageName);
+
+  console.log("Save file to: ", filepath);
+
+  res.render('create');
 });
+
+
+
 
 module.exports = router;

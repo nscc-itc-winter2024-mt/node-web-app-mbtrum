@@ -1,6 +1,20 @@
-<%- include('header', { pageTitle: 'Home Page'}) -%>
+<%- include('header', { pageTitle: 'Home'}) -%>
 
-<h1><%= title %></h1>
-<p><%= welcome %></p>
+<h1>Our Pets</h1>
+
+<p>
+    <a href="/create" class="btn btn-secondary">Add new Pet</a>
+</p>
+
+<% for(var i=0; i < pets.length; i++) { %>
+    <div class="row">
+        <div class="col-md-2">
+
+            <%= pets[i].Name %> -    
+            <%= pets[i].Age %> years old - 
+            <%= pets[i].Breed %>
+        </div>
+    </div>
+<% } %>
 
 <%- include('footer') -%>
