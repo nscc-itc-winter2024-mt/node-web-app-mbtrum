@@ -1,0 +1,12 @@
+<%- include('header', { pageTitle: 'Home'}) -%>
+
+<h1>Remove Pet</h1>
+
+<h3>Are you sure you want to remove <%= pet.Name %>?</h3>
+
+<form method="post">
+    <input type="submit" value="Yes" class="btn btn-danger">&nbsp;&nbsp;
+    <a href="/" class="btn btn-secondary">Cancel</a>
+</form>
+
+<%- include('footer') -%>

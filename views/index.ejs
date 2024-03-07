@@ -8,11 +8,14 @@
 
 <% for(var i=0; i < pets.length; i++) { %>
     <div class="row">
-        <div class="col-md-2">
-
-            <%= pets[i].Name %> -    
-            <%= pets[i].Age %> years old - 
-            <%= pets[i].Breed %>
+        <div class="col-md-3">
+            <img src="/uploads/<%= pets[i].PhotoFileName %>" class="img-fluid mb-3">
+        </div>
+        <div class="col-md-4">
+            <h3><%= pets[i].Name %></h3>
+            <p><%= pets[i].Age %> years old</p>
+            <p><%= pets[i].Breed %></p>
+            <p><a href="/delete/<%= pets[i].PetId %>">Remove</a></p>
         </div>
     </div>
 <% } %>
