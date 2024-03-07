@@ -1,6 +1,7 @@
 const express = require('express');
 const sqlite3 = require('sqlite3'); 
 const path = require('path');
+const appRoot = require('app-root-path');
 
 const router = express.Router();
 
@@ -35,7 +36,7 @@ router.post('/create',  function(req, res, next) {
   const imageFile = req.files.imageFile;
   const imageName = imageFile.name;
 
-  var filepath = path.join(_dirname, 'public', 'uploads', imageName);
+  var filepath = path.join(appRoot.path, 'public', 'uploads', imageName);
 
   console.log("Save file to: ", filepath);
 
